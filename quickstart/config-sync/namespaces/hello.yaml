@@ -16,6 +16,6 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: hello
+  name: namespacemanaged
 # [END anthos_config_management_quickstart_namespaces_hello_namespace]
 # [END anthosconfig_quickstart_namespaces_hello_namespace] 
