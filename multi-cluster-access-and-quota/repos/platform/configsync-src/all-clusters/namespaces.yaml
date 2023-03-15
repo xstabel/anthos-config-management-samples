@@ -31,3 +31,35 @@ kind: Namespace
 metadata:
   name: tenant-c
 # [END anthosconfig_multi_cluster_access_and_quota_src_tenant_c_namespace]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-guestbook-frontend
+  namespace: tenant-a
+  labels:
+    app: nodejs-guestbook
+    tier: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs-guestbook
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: nodejs-guestbook
+        tier: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: nodejs-guestbook-frontend
+        ports:
+        - name: http-server
+          containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        - name: GUESTBOOK_API_ADDR
+          value: nodejs-guestbook-backend:8080
