@@ -31,37 +31,3 @@ kind: Namespace
 metadata:
   name: tenant-c
 # [END anthosconfig_multi_cluster_access_and_quota_src_tenant_c_namespace]
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: front-deployment
-  namespace: tenant-b
-spec:
-  selector:
-    matchLabels:
-      app: front
-  replicas: 1 
-  template:
-    metadata:
-      labels:
-        app: front
-    spec:
-      containers:
-      - name: hello-demo
-        image: gcr.io/google-samples/node-hello:1.0
-        ports:
-        - containerPort: 80
----
-apiVersion: route.openshift.io/v1
-kind: Route
-metadata:
-  name: demoruta
-  namespace: tenant-b
-spec:
-  path: /
-  to:
-    kind: Service
-    name: example
-  port:
-    targetPort: 80
