@@ -48,7 +48,7 @@ spec:
         app: front
     spec:
       containers:
-      - name: nginx-cris
-        image: nginx
+      - name: hello-demo
+        image: gcr.io/google-samples/node-hello:1.0
         ports:
         - containerPort: 80
