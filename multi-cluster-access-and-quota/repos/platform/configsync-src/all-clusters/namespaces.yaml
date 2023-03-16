@@ -31,3 +31,21 @@ kind: Namespace
 metadata:
   name: tenant-c
 # [END anthosconfig_multi_cluster_access_and_quota_src_tenant_c_namespace]
+metadata:
+  name: front-deployment
+  namespace: tenant-b
+spec:
+  selector:
+    matchLabels:
+      app: front
+  replicas: 1 
+  template:
+    metadata:
+      labels:
+        app: front
+    spec:
+      containers:
+      - name: hello-demo
+        image: gcr.io/google-samples/node-hello:1.0
+        ports:
+        - containerPort: 80
