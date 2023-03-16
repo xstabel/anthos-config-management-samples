@@ -25,12 +25,8 @@ metadata:
   name: tenant-b
 # [END anthosconfig_multi_cluster_access_and_quota_src_tenant_b_namespace]
 ---
-# [START anthosconfig_multi_cluster_access_and_quota_src_tenant_c_namespace]
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: tenant-c
-# [END anthosconfig_multi_cluster_access_and_quota_src_tenant_c_namespace]
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: front-deployment
   namespace: tenant-b
