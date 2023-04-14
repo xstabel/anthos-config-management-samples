@@ -45,3 +45,29 @@ spec:
         image: gcr.io/google-samples/node-hello:1.0
         ports:
         - containerPort: 80
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-techmeeting
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demofront-deployment
+  namespace: tenant-techmeeting
+spec:
+  selector:
+    matchLabels:
+      app: demofront
+  replicas: 1 
+  template:
+    metadata:
+      labels:
+        app: demofront
+    spec:
+      containers:
+      - name: hello-demo
+        image: gcr.io/google-samples/node-hello:1.0
+        ports:
+        - containerPort: 80
