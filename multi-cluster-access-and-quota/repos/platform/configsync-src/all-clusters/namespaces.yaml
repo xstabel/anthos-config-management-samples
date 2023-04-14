@@ -71,3 +71,16 @@ spec:
         image: gcr.io/google-samples/node-hello:1.0
         ports:
         - containerPort: 80
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: demoruta
+  namespace: tenant-techmeeting
+spec:
+  path: /
+  to:
+    kind: Service
+    name: example
+  port:
+    targetPort: 80
