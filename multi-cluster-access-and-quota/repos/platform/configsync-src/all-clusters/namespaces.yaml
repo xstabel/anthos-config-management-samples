@@ -45,3 +45,43 @@ spec:
         image: gcr.io/google-samples/node-hello:1.0
         ports:
         - containerPort: 80
+---
+# [START anthosconfig_multi_cluster_access_and_quota_src_tenant_b_namespace]
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-techmeeting
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demofront-deployment
+  namespace: tenant-techmeeting
+spec:
+  selector:
+    matchLabels:
+      app: demofront
+  replicas: 1 
+  template:
+    metadata:
+      labels:
+        app: demofront
+    spec:
+      containers:
+      - name: hello-demo
+        image: gcr.io/google-samples/node-hello:1.0
+        ports:
+        - containerPort: 80
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: demoruta
+  namespace: tenant-techmeeting
+spec:
+  path: /
+  to:
+    kind: Service
+    name: example
+  port:
+    targetPort: 80
